@@ -1,9 +1,9 @@
-package demo.controller;
+package ru.kata.spring.boot_rest.demo.controller;
 
-import demo.model.Role;
-import demo.model.User;
-import demo.service.RoleService;
-import demo.service.UserService;
+import ru.kata.spring.boot_rest.demo.model.Role;
+import ru.kata.spring.boot_rest.demo.model.User;
+import ru.kata.spring.boot_rest.demo.service.RoleService;
+import ru.kata.spring.boot_rest.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

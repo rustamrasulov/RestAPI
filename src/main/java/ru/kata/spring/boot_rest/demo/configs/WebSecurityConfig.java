@@ -1,4 +1,4 @@
-package demo.configs;
+package ru.kata.spring.boot_rest.demo.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
         http
                 .authorizeRequests()
-                .antMatchers("**/favicon.png").permitAll()
+                .antMatchers("**/favicon.png").anonymous()
                 .antMatchers("/login").anonymous()
                 .antMatchers("/logout").anonymous()
                 .antMatchers("/user/**").hasAuthority("USER")

@@ -1,4 +1,4 @@
-package demo.configs;
+package ru.kata.spring.boot_rest.demo.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

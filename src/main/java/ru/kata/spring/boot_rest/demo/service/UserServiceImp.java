@@ -1,7 +1,7 @@
-package demo.service;
+package ru.kata.spring.boot_rest.demo.service;
 
-import demo.dao.UserDao;
-import demo.model.User;
+import ru.kata.spring.boot_rest.demo.dao.UserDao;
+import ru.kata.spring.boot_rest.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package demo.model;
+package ru.kata.spring.boot_rest.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,6 +1,6 @@
-package demo.service;
+package ru.kata.spring.boot_rest.demo.service;
 
-import demo.model.Role;
+import ru.kata.spring.boot_rest.demo.model.Role;
 
 import java.util.List;
 

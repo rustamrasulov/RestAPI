@@ -1,6 +1,6 @@
-package demo.dao;
+package ru.kata.spring.boot_rest.demo.dao;
 
-import demo.model.User;
+import ru.kata.spring.boot_rest.demo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package demo.controller;
+package ru.kata.spring.boot_rest.demo.controller;
 
-import demo.service.UserService;
+import ru.kata.spring.boot_rest.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

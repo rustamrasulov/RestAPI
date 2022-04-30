@@ -1,7 +1,7 @@
-package demo.service;
+package ru.kata.spring.boot_rest.demo.service;
 
-import demo.dao.RoleDao;
-import demo.model.Role;
+import ru.kata.spring.boot_rest.demo.dao.RoleDao;
+import ru.kata.spring.boot_rest.demo.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
