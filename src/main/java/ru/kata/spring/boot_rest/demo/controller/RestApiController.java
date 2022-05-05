@@ -1,7 +1,9 @@
 package ru.kata.spring.boot_rest.demo.controller;
 
 import org.springframework.validation.BindingResult;
+import ru.kata.spring.boot_rest.demo.model.Role;
 import ru.kata.spring.boot_rest.demo.model.User;
+import ru.kata.spring.boot_rest.demo.service.RoleService;
 import ru.kata.spring.boot_rest.demo.service.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -18,9 +19,10 @@ import java.util.List;
 public class RestApiController {
 
     private final UserService userService;
-
-    public RestApiController(UserService userService) {
+    private final RoleService roleService;
+    public RestApiController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -72,5 +74,14 @@ public class RestApiController {
             return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "roles", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<Role>> getAllRoles() {
+        List<Role> roles = this.roleService.findAll();
+        if (roles.isEmpty()) {
+            return new ResponseEntity<List<Role>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Role>>(roles, HttpStatus.OK);
     }
 }
