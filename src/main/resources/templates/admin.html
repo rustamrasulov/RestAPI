@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Admin panel</title>
-    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}"/>
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet"
@@ -50,8 +50,8 @@
                 <h1>Admin panel</h1>
                 <div class="tab-content">
                     <ul class="nav nav-tabs">
-                        <a class="nav-link active" role="tab">Users Table</a>
-                        <a class="nav-link" th:href="@{/admin/new}" role="tab">New User</a>
+                        <a class="nav-link" role="tab" id="link-user_tab">Users Table</a>
+                        <a class="nav-link" role="tab" id="link-new_user_tab">New User</a>
                     </ul>
                     <div class="card">
                         <div class="card-header">
@@ -76,11 +76,51 @@
                                 <tbody id="users-table-rows"></tbody>
 
                             </table>
+
+                            <div id="form-new_user" class="tab-pane fade" role="tabpanel">
+                                <form align="center" class="row justify-content-md-center col-md-5"
+                                      action="new" th:method="POST" th:object="${user}">
+                                    <label for="firstName"><b>First name</b></label>
+                                    <input name="firstName" value="" th:type="text" class="form-control" id="firstName"
+                                           required/>
+                                    <br>
+                                    <label for="lastName"><b>Last name</b></label>
+                                    <input th:name="lastName" value="" th:type="text" class="form-control" id="lastName"
+                                           required/>
+                                    <br>
+                                    <label for="age"><b>Age</b></label>
+                                    <input th:name="age" value="" th:type="number" class="form-control text-right"
+                                           id="age"/>
+                                    <br>
+                                    <label for="username"><b>Email</b></label>
+                                    <input th:name="username" value="" th:type="text" class="form-control" id="username"
+                                           required/>
+                                    <br>
+                                    <label for="password"><b>Password</b></label>
+                                    <input th:name="password" value="" th:type="password" class="form-control"
+                                           id="password" required/>
+                                    <br>
+                                    <label for="roles"><b>Role</b></label>
+                                    <select multiple class="form-control form-control-sm" id="roles" name="roles"
+                                            size="2"
+                                            required>
+                                        <option th:each="role: ${roles}"
+                                                th:text="${role.roleName}"
+                                                th:value="${role.id}">
+                                        </option>
+                                    </select>
+                                    <br>
+                                    <button th:type="submit" class="btn btn-success"
+                                            value="Add new user">Add new user
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <!--  My owned scripts  -->

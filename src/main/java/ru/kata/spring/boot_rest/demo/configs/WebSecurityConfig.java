@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
         http
                 .authorizeRequests()
-                .antMatchers("**/favicon.png").anonymous()
+                .antMatchers("**/favicon.ico").anonymous()
                 .antMatchers("/login").anonymous()
                 .antMatchers("/logout").anonymous()
                 .antMatchers("/user/**").hasAuthority("USER")
