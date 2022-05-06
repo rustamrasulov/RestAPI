@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dadbdaa-380d-4e1d-8265-3e258d18fb4c" name="Changes" comment="Add new_user form">
+    <list default="true" id="3dadbdaa-380d-4e1d-8265-3e258d18fb4c" name="Changes" comment="Realise switch between AllUser and NewUser panels">
       <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.js" afterDir="false" />
@@ -145,7 +145,7 @@
       <workItem from="1651684228759" duration="616000" />
       <workItem from="1651762540660" duration="5063000" />
       <workItem from="1651771011185" duration="2471000" />
-      <workItem from="1651842880464" duration="6964000" />
+      <workItem from="1651842880464" duration="10971000" />
     </task>
     <task id="LOCAL-00001" summary="Make GET /api/users in RestApiController.java">
       <created>1651259733307</created>
@@ -182,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651773488123</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Realise switch between AllUser and NewUser panels">
+      <created>1651853768157</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1651853768157</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +212,19 @@
     <MESSAGE value="Create REST API (RestApiController)" />
     <MESSAGE value="Create user table function" />
     <MESSAGE value="Add new_user form" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add new_user form" />
+    <MESSAGE value="Realise switch between AllUser and NewUser panels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Realise switch between AllUser and NewUser panels" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/static/js/app.js</url>
+          <line>72</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

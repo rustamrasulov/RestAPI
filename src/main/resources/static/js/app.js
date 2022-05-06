@@ -1,6 +1,7 @@
 const url = 'http://localhost:8080/api/users'
 
 const usersTableId = $('#users-table-rows');
+const formNewUser = $('#form-new_user');
 
 showUsersTable()
 
@@ -59,6 +60,23 @@ function addUserToTable(user) {
         .append($('<td>').append($('<button class="btn btn-sm btn-info">').text('Edit')))
         .append($('<td>').append($('<button class="btn btn-sm btn-danger">').text('Delete')))
 }
+
+// submitNewUser.onclick = function () {
+//     console.log(formNewUser.find('#newFirstName').val());
+// }
+
+// formNewUser.onsubmit(function () {
+//     alert(formNewUser.find('#newFirstName').val())
+// })
+
+formNewUser.submit(function () {
+
+        console.log('firstName', formNewUser.find('#newFirstName').val())
+        console.log('lastName', formNewUser.find('#newLastName').val())
+        console.log('age', formNewUser.find('#newAge').val())
+        console.log('email', formNewUser.find('#newEmail').val())
+        console.log('password', formNewUser.find('#newPassword').val())
+})
 
 function addNewUser() {
 

@@ -106,15 +106,15 @@
                                         <label for="roles"><b>Role</b></label>
                                         <select multiple class="form-control form-control-sm" id="roles"
                                                 name="roles"
-                                                size="2"
-                                                required>
-                                            <option th:each="role: ${roles}"
-                                                    th:text="${role.roleName}"
-                                                    th:value="${role.id}">
-                                            </option>
+                                                size="2">
+<!--                                                required>-->
+<!--                                            <option th:each="role: ${roles}"-->
+<!--                                                    th:text="${role.roleName}"-->
+<!--                                                    th:value="${role.id}">-->
+<!--                                            </option>-->
                                         </select>
                                         <br>
-                                        <button type="submit" class="btn btn-success"
+                                        <button type="submit" class="btn btn-success" id="submit-new-user-btn"
                                                 value="Add new user">Add new user
                                         </button>
                                         <!--                                        </form>                                        <form id="form-new_user"-->
