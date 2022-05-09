@@ -102,16 +102,16 @@
                                                required/>
                                         <label for="newPassword"><b>Password</b></label>
                                         <input name="password" value="" type="password" class="form-control"
-                                               id="newPassword" required/>
-                                        <label for="roles"><b>Role</b></label>
-                                        <select multiple class="form-control form-control-sm" id="roles"
+                                               id="newPassword" autocomplete="on" required/>
+                                        <label for="newRoles"><b>Role</b></label>
+                                        <select multiple class="form-control form-control-sm" id="newRoles"
                                                 name="roles"
                                                 size="2">
-<!--                                                required>-->
-<!--                                            <option th:each="role: ${roles}"-->
-<!--                                                    th:text="${role.roleName}"-->
-<!--                                                    th:value="${role.id}">-->
-<!--                                            </option>-->
+                                            <!--                                                required>-->
+                                            <!--                                            <option th:each="role: ${roles}"-->
+                                            <!--                                                    th:text="${role.roleName}"-->
+                                            <!--                                                    th:value="${role.id}">-->
+                                            <!--                                            </option>-->
                                         </select>
                                         <br>
                                         <button type="submit" class="btn btn-success" id="submit-new-user-btn"
@@ -162,7 +162,61 @@
         </div>
     </div>
 </div>
+
+<div id="user-profile" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete user</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form role="form" id="userprofile-form" onsubmit="return false;">
+                <div class="modal-body">
+                    <div class="container col-6 text-center">
+                        <div class="form-group text-center">
+                            <div>
+                                <label for="id">ID</label>
+                                <input type="text" class="form-control" name="id" id="id" readonly>
+                            </div>
+                            <div>
+                                <label for="firstName">First name</label>
+                                <input type="text" class="form-control" name="firstName" id="firstName">
+                            </div>
+                            <div>
+                                <label for="lastName">Last name</label>
+                                <input type="text" class="form-control" name="lastName" id="lastName">
+                            </div>
+                            <div>
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control" name="age" id="age">
+                            </div>
+                            <div>
+                                <label for="email">E-mail</label>
+                                <input type="text" class="form-control" name="email" id="email" autocomplete="email">
+                            </div>
+                            <div id="password-div">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       autocomplete="current-password">
+                            </div>
+                            <div>
+                                <label for="userRoles">Role</label>
+                                <select multiple class="form-control" id="userRoles" name="roles"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-danger submit">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
 
 </div>
 </div>

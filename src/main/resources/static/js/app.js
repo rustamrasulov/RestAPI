@@ -2,13 +2,36 @@ const url = 'http://localhost:8080/api/users'
 
 const usersTableId = $('#users-table-rows');
 const formNewUser = $('#form-new_user');
+const userForm = $('#user-profile');
 
-showUsersTable()
+let _role = {}
+let roleArray = []
+
+function getAllRoles() {
+    fetch('/api/roles').then(function (response) {
+        if (response.ok) {
+            response.json().then(roles => {
+                roles.forEach(role => {
+                    _role = {
+                        'id': parseInt(role.id),
+                        'roleName': role.roleName,
+                        'authority': role.authority
+                    }
+                    roleArray.push(_role)
+                });
+                return roleArray
+            });
+        } else {
+            console.error('Network request for roles.json failed with response ' + response.status + ': ' + response.statusText);
+            return null
+        }
+    });
+}
 
 $('#link-user_tab').click(() => showUsersTable())
 $('#link-new_user_tab').click(() => showNewUserForm())
 
-function showUsersTable () {
+function showUsersTable() {
     $('#link-user_tab').addClass('active')
     $('#users-table-header').addClass('show').addClass('active')
     $('#users-table-rows').addClass('active').addClass('show')
@@ -18,27 +41,24 @@ function showUsersTable () {
     getAllUsers()
 }
 
-function showNewUserForm () {
+function showNewUserForm() {
     $('#form-new_user-header').addClass('show').addClass('active')
     $('#form-new_user').addClass('show').addClass('active')
     $('#link-new_user_tab').addClass('active')
     $('#link-user_tab').removeClass('active')
     $('#users-table-header').removeClass('show').removeClass('active')
     $('#users-table-rows').removeClass('show').removeClass('active')
-
+    createFormNewUser()
 }
 
 function getAllUsers() {
     fetch('/api/users').then(function (response) {
-        if (response.ok) { // если HTTP-статус в диапазоне 200-299
-            //
-            // for (let [key, value] of response.headers) {
-            //     console.log(`${key} = ${value}`);
-            // }
-            // console.log(response.headers)
+        if (response.ok) {
             response.json().then(users => {
                 usersTableId.empty();
                 users.forEach(user => {
+
+                    console.log(user)
                     addUserToTable(user)
                 })
             })
@@ -58,7 +78,11 @@ function addUserToTable(user) {
         .append($('<td>').text(user.email))
         .append($('<td>').text(user.authorities.map(roles => roles.roleName)))
         .append($('<td>').append($('<button class="btn btn-sm btn-info">').text('Edit')))
-        .append($('<td>').append($('<button class="btn btn-sm btn-danger">').text('Delete')))
+        .append($('<td>').append($('<button class="btn btn-sm btn-danger">')
+            .click(() => {
+                deleteUserForm(user.id)
+            })
+            .text('Delete')))
 }
 
 // submitNewUser.onclick = function () {
@@ -69,16 +93,99 @@ function addUserToTable(user) {
 //     alert(formNewUser.find('#newFirstName').val())
 // })
 
-formNewUser.submit(function () {
+function createFormNewUser() {
+    formNewUser.find('#newFirstName').val('');
+    formNewUser.find('#newLastName').val('');
+    formNewUser.find('#newAge').val('');
+    formNewUser.find('#newEmail').val('');
+    formNewUser.find('#newPassword').val('');
+    formNewUser.find('#newRoles').empty();
+    roleArray.forEach(role => {
+        formNewUser.find('#newRoles')
+            .append($('<option>').val(role.id).text(role.roleName));
+    })
+}
 
-        console.log('firstName', formNewUser.find('#newFirstName').val())
-        console.log('lastName', formNewUser.find('#newLastName').val())
-        console.log('age', formNewUser.find('#newAge').val())
-        console.log('email', formNewUser.find('#newEmail').val())
-        console.log('password', formNewUser.find('#newPassword').val())
+
+formNewUser.submit(async function () {
+
+
+    function getSelectedRoles() {
+        // return formNewUser.find('#newRoles').val().map(id => parseInt(id))
+        let array = []
+        for (let elementId of formNewUser.find('#newRoles').val().map(id => parseInt(id))) {
+            array.push(roleArray.find(function (_role) {
+                return _role.id === elementId
+            }))
+        }
+        return array
+    }
+
+    let user = {
+        firstName: formNewUser.find('#newFirstName').val(),
+        lastName: formNewUser.find('#newLastName').val(),
+        age: formNewUser.find('#newAge').val(),
+        username: formNewUser.find('#newUsername').val(),
+        password: formNewUser.find('#newPassword').val(),
+        roles: getSelectedRoles()
+    }
+
+    // console.log(JSON.stringify(user))
+
+
+    let response = fetch('/api/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user)
+    })
+
+    let result = await response.json();
+
 })
 
 function addNewUser() {
 
 }
 
+function deleteUser(id) {
+    fetch('/api/users/' + id, {method: 'DELETE'})
+        .then(function (response) {
+            if (response.ok) {
+                userForm.modal('hide');
+                getAllUsers()
+            }
+        });
+}
+
+function deleteUserForm(id) {
+
+    fetch((`/api/users/${id}`))
+        .then(function (response) {
+            response.json().then(function (user) {
+                userForm.find('#id').val(user.id);
+                userForm.find('#firstName').val(user.firstName);
+                userForm.find('#lastName').val(user.lastName);
+                userForm.find('#age').val(user.age);
+                userForm.find('#email').val(user.email);
+                userForm.find('#password').val('');
+                userForm.find('.modal-title').text('Delete user');
+                userForm.find('#password-div').hide();
+                userForm.find('.submit')
+                    .attr('onClick', 'deleteUser(' + id + ');');
+                userForm.find('#userRoles').empty()
+                userForm.find('#userRoles').append($('<option>')
+                .text(user.authorities.map(roles => roles.roleName)))
+            });
+            userForm.modal();
+        });
+}
+
+
+$(document).ready(
+    () => {
+        getAllRoles()
+        getAllUsers()
+    }
+);
