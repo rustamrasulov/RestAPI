@@ -42,16 +42,10 @@ public class RestApiController {
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<User> saveUser(@Valid @RequestBody User user, BindingResult result) {
-        System.out.println("Incoming user: " + user);
         HttpHeaders headers = new HttpHeaders();
-//        if (result.hasErrors() || user == null) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-        user.getRoles().forEach(System.err::println);
-        System.err.println(user);
-        getUserRoles(user);
-        System.out.println(user);
-        this.userService.updateUser(user);
+        if (result.hasErrors() || user == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         this.userService.saveUser(user);
         return new ResponseEntity<>(user, headers, HttpStatus.CREATED);
     }

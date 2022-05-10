@@ -28,7 +28,7 @@ public class User implements UserDetails {
     @NotEmpty
     private String password;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

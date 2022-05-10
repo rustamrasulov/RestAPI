@@ -2,7 +2,7 @@ const url = 'http://localhost:8080/api/users'
 
 const usersTableId = $('#users-table-rows');
 const formNewUser = $('#form-new_user');
-const userForm = $('#user-profile');
+const formDeleteUser = $('#form-delete_user');
 
 let _role = {}
 let roleArray = []
@@ -108,8 +108,6 @@ function createFormNewUser() {
 
 
 formNewUser.submit(async function () {
-
-
     function getSelectedRoles() {
         // return formNewUser.find('#newRoles').val().map(id => parseInt(id))
         let array = []
@@ -130,55 +128,53 @@ formNewUser.submit(async function () {
         roles: getSelectedRoles()
     }
 
-    // console.log(JSON.stringify(user))
+    addNewUser(user)
+})
 
-
-    let response = fetch('/api/users', {
+function addNewUser(user) {
+    fetch('/api/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(user)
+    }).then(function (response) {
+        if (response.ok) {
+            showUsersTable()
+        } else {
+            showNewUserForm()
+        }
     })
-
-    let result = await response.json();
-
-})
-
-function addNewUser() {
-
 }
 
 function deleteUser(id) {
     fetch('/api/users/' + id, {method: 'DELETE'})
         .then(function (response) {
             if (response.ok) {
-                userForm.modal('hide');
+                formDeleteUser.modal('hide');
                 getAllUsers()
             }
         });
 }
 
 function deleteUserForm(id) {
-
     fetch((`/api/users/${id}`))
         .then(function (response) {
             response.json().then(function (user) {
-                userForm.find('#id').val(user.id);
-                userForm.find('#firstName').val(user.firstName);
-                userForm.find('#lastName').val(user.lastName);
-                userForm.find('#age').val(user.age);
-                userForm.find('#email').val(user.email);
-                userForm.find('#password').val('');
-                userForm.find('.modal-title').text('Delete user');
-                userForm.find('#password-div').hide();
-                userForm.find('.submit')
+                formDeleteUser.find('#id').val(user.id);
+                formDeleteUser.find('#firstName').val(user.firstName);
+                formDeleteUser.find('#lastName').val(user.lastName);
+                formDeleteUser.find('#age').val(user.age);
+                formDeleteUser.find('#email').val(user.email);
+                formDeleteUser.find('#password').val('');
+                formDeleteUser.find('.modal-title').text('Delete user');
+                formDeleteUser.find('.submit')
                     .attr('onClick', 'deleteUser(' + id + ');');
-                userForm.find('#userRoles').empty()
-                userForm.find('#userRoles').append($('<option>')
-                .text(user.authorities.map(roles => roles.roleName)))
+                formDeleteUser.find('#userRoles').empty()
+                formDeleteUser.find('#userRoles').append($('<option>')
+                    .text(user.authorities.map(roles => roles.roleName)))
             });
-            userForm.modal();
+            formDeleteUser.modal();
         });
 }
 

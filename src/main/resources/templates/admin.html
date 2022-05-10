@@ -163,7 +163,56 @@
     </div>
 </div>
 
-<div id="user-profile" class="modal fade">
+<div id="form-delete_user" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete user</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form role="form" id="userdelete-form" onsubmit="return false;">
+                <div class="modal-body">
+                    <div class="container col-6 text-center">
+                        <div class="form-group text-center">
+                            <div>
+                                <label for="id">ID</label>
+                                <input type="text" class="form-control text-right" name="id" id="id" readonly>
+                            </div>
+                            <div>
+                                <label for="firstName">First name</label>
+                                <input type="text" class="form-control" name="firstName" id="firstName" readonly>
+                            </div>
+                            <div>
+                                <label for="lastName">Last name</label>
+                                <input type="text" class="form-control" name="lastName" id="lastName" readonly>
+                            </div>
+                            <div>
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control text-right" name="age" id="age" readonly>
+                            </div>
+                            <div>
+                                <label for="email">E-mail</label>
+                                <input type="text" class="form-control" name="email" id="email" autocomplete="email" readonly>
+                            </div>
+                            <div>
+                                <label for="userRoles">Role</label>
+                                <select multiple class="form-control" id="userRoles" name="roles" readonly></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-danger submit">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="form-edit_user" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -178,32 +227,32 @@
                         <div class="form-group text-center">
                             <div>
                                 <label for="id">ID</label>
-                                <input type="text" class="form-control" name="id" id="id" readonly>
+                                <input type="text" class="form-control text-right" name="id" id="id" readonly>
                             </div>
                             <div>
                                 <label for="firstName">First name</label>
-                                <input type="text" class="form-control" name="firstName" id="firstName">
+                                <input type="text" class="form-control" name="firstName" id="firstName" readonly>
                             </div>
                             <div>
                                 <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" name="lastName" id="lastName">
+                                <input type="text" class="form-control" name="lastName" id="lastName" readonly>
                             </div>
                             <div>
                                 <label for="age">Age</label>
-                                <input type="number" class="form-control" name="age" id="age">
+                                <input type="number" class="form-control text-right" name="age" id="age" readonly>
                             </div>
                             <div>
                                 <label for="email">E-mail</label>
-                                <input type="text" class="form-control" name="email" id="email" autocomplete="email">
+                                <input type="text" class="form-control" name="email" id="email" autocomplete="email" readonly>
                             </div>
                             <div id="password-div">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="password"
-                                       autocomplete="current-password">
+                                       autocomplete="current-password" readonly>
                             </div>
                             <div>
                                 <label for="userRoles">Role</label>
-                                <select multiple class="form-control" id="userRoles" name="roles"></select>
+                                <select multiple class="form-control" id="userRoles" name="roles" readonly></select>
                             </div>
                         </div>
                     </div>
@@ -216,7 +265,6 @@
         </div>
     </div>
 </div>
-
 
 </div>
 </div>
