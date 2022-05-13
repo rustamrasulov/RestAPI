@@ -51,7 +51,12 @@ public class RestApiController {
     }
 
     @PutMapping(value = "/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<User> updateUser(@Valid @RequestBody  User user, BindingResult result) {
+    public ResponseEntity<User> updateUser( @RequestBody  User user, BindingResult result) {
+//        System.err.println(user);
+//        if (user.getPassword() == null)
+//            user.setPassword("");
+        System.err.println(user);
+
         HttpHeaders headers = new HttpHeaders();
         if (result.hasErrors() || user == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

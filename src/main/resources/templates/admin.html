@@ -172,7 +172,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form role="form" id="userdelete-form" onsubmit="return false;">
+            <form role="form" id="user-delete-form" onsubmit="return false;">
                 <div class="modal-body">
                     <div class="container col-6 text-center">
                         <div class="form-group text-center">
@@ -193,8 +193,8 @@
                                 <input type="number" class="form-control text-right" name="age" id="age" readonly>
                             </div>
                             <div>
-                                <label for="email">E-mail</label>
-                                <input type="text" class="form-control" name="email" id="email" autocomplete="email" readonly>
+                                <label for="username">E-mail</label>
+                                <input type="text" class="form-control" name="username" id="username" autocomplete="email" readonly>
                             </div>
                             <div>
                                 <label for="userRoles">Role</label>
@@ -216,50 +216,52 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Delete user</h3>
+                <h3 class="modal-title">Edit user</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form role="form" id="userprofile-form" onsubmit="return false;">
+            <form role="form" id="user-edit-form" onsubmit="return false;">
                 <div class="modal-body">
                     <div class="container col-6 text-center">
                         <div class="form-group text-center">
                             <div>
-                                <label for="id">ID</label>
-                                <input type="text" class="form-control text-right" name="id" id="id" readonly>
+                                <label for="editId">ID</label>
+                                <input type="text" class="form-control text-right" name="editId" id="editId" readonly>
                             </div>
                             <div>
-                                <label for="firstName">First name</label>
-                                <input type="text" class="form-control" name="firstName" id="firstName" readonly>
+                                <label for="editFirstName">First name</label>
+                                <input type="text" class="form-control" name="editFirstName" id="editFirstName" >
                             </div>
                             <div>
-                                <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" name="lastName" id="lastName" readonly>
+                                <label for="editLastName">Last name</label>
+                                <input type="text" class="form-control" name="editLastName" id="editLastName" >
                             </div>
                             <div>
-                                <label for="age">Age</label>
-                                <input type="number" class="form-control text-right" name="age" id="age" readonly>
+                                <label for="editAge">Age</label>
+                                <input type="number" class="form-control text-right" name="editAge" id="editAge" >
                             </div>
                             <div>
-                                <label for="email">E-mail</label>
-                                <input type="text" class="form-control" name="email" id="email" autocomplete="email" readonly>
+                                <label for="editUsername">E-mail</label>
+                                <input type="text" class="form-control" name="editUsername" id="editUsername" autocomplete="email" >
                             </div>
                             <div id="password-div">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                       autocomplete="current-password" readonly>
+                                <label for="editPassword">Password</label>
+                                <input type="password" class="form-control" name="editPassword" id="editPassword"
+                                       autocomplete="current-password">
                             </div>
                             <div>
-                                <label for="userRoles">Role</label>
-                                <select multiple class="form-control" id="userRoles" name="roles" readonly></select>
+                                <label for="editUserRoles">Role</label>
+                                <select multiple class="form-control" id="editUserRoles" name="roles"></select>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary btn-danger submit">Delete</button>
+                    <button type="submit" class="btn btn-success" id="submit-edit-user-btn"
+                            value="Edit">Edit
+                    </button>
                 </div>
             </form>
         </div>

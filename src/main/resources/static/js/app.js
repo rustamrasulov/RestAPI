@@ -3,6 +3,7 @@ const url = 'http://localhost:8080/api/users'
 const usersTableId = $('#users-table-rows');
 const formNewUser = $('#form-new_user');
 const formDeleteUser = $('#form-delete_user');
+const formEditUser = $('#form-edit_user');
 
 let _role = {}
 let roleArray = []
@@ -75,12 +76,16 @@ function addUserToTable(user) {
         .append($('<td>').text(user.firstName))
         .append($('<td>').text(user.lastName))
         .append($('<td>').text(user.age))
-        .append($('<td>').text(user.email))
-        .append($('<td>').text(user.authorities.map(roles => roles.roleName)))
-        .append($('<td>').append($('<button class="btn btn-sm btn-info">').text('Edit')))
-        .append($('<td>').append($('<button class="btn btn-sm btn-danger">')
+        .append($('<td>').text(user.username))
+        .append($('<td>').text(user.roles.map(roles => roles.roleName)))
+        .append($('<td>').append($('<button class="btn btn-info">')
             .click(() => {
-                deleteUserForm(user.id)
+                editUserForm(user.id);
+            })
+            .text('Edit')))
+        .append($('<td>').append($('<button class="btn btn-danger">')
+            .click(() => {
+                deleteUserForm(user.id);
             })
             .text('Delete')))
 }
@@ -97,7 +102,7 @@ function createFormNewUser() {
     formNewUser.find('#newFirstName').val('');
     formNewUser.find('#newLastName').val('');
     formNewUser.find('#newAge').val('');
-    formNewUser.find('#newEmail').val('');
+    formNewUser.find('#newUsername').val('');
     formNewUser.find('#newPassword').val('');
     formNewUser.find('#newRoles').empty();
     roleArray.forEach(role => {
@@ -106,10 +111,8 @@ function createFormNewUser() {
     })
 }
 
-
 formNewUser.submit(async function () {
     function getSelectedRoles() {
-        // return formNewUser.find('#newRoles').val().map(id => parseInt(id))
         let array = []
         for (let elementId of formNewUser.find('#newRoles').val().map(id => parseInt(id))) {
             array.push(roleArray.find(function (_role) {
@@ -127,7 +130,6 @@ formNewUser.submit(async function () {
         password: formNewUser.find('#newPassword').val(),
         roles: getSelectedRoles()
     }
-
     addNewUser(user)
 })
 
@@ -140,6 +142,7 @@ function addNewUser(user) {
         body: JSON.stringify(user)
     }).then(function (response) {
         if (response.ok) {
+            getAllUsers()
             showUsersTable()
         } else {
             showNewUserForm()
@@ -165,19 +168,98 @@ function deleteUserForm(id) {
                 formDeleteUser.find('#firstName').val(user.firstName);
                 formDeleteUser.find('#lastName').val(user.lastName);
                 formDeleteUser.find('#age').val(user.age);
-                formDeleteUser.find('#email').val(user.email);
+                formDeleteUser.find('#username').val(user.email);
                 formDeleteUser.find('#password').val('');
-                formDeleteUser.find('.modal-title').text('Delete user');
+                formDeleteUser.find('#userRoles').empty()
+                user.roles.forEach(role => {
+                    formDeleteUser.find('#userRoles').append($('<option>')
+                        .val(role.id).text(role.roleName)
+                    )
+                })
                 formDeleteUser.find('.submit')
                     .attr('onClick', 'deleteUser(' + id + ');');
-                formDeleteUser.find('#userRoles').empty()
-                formDeleteUser.find('#userRoles').append($('<option>')
-                    .text(user.authorities.map(roles => roles.roleName)))
             });
             formDeleteUser.modal();
         });
 }
 
+function updateUser(user) {
+    fetch('/api/users', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user)
+    }).then(function (response) {
+        if (response.ok) {
+            showUsersTable()
+        } else {
+            showNewUserForm()
+        }
+    })
+}
+
+function editUserForm(id) {
+    formEditUser.find('#editId').empty()
+    formEditUser.find('#editFirstName').empty()
+    formEditUser.find('#editLastName').empty()
+    formEditUser.find('#editAge').empty()
+    formEditUser.find('#editUsername').empty()
+    formEditUser.find('#password').empty()
+    formEditUser.find('#editUserRoles').empty()
+    fetch((`/api/users/${id}`))
+        .then(function (response) {
+            response.json().then(function (user) {
+                formEditUser.find('#editId').val(user.id);
+                formEditUser.find('#editFirstName').val(user.firstName);
+                formEditUser.find('#editLastName').val(user.lastName);
+                formEditUser.find('#editAge').val(user.age);
+                formEditUser.find('#editUsername').val(user.email);
+                formEditUser.find('#password').val('');
+                // formEditUser.find('#editUserRoles').empty()
+                // user.roles.forEach(role => {
+                //     formDeleteUser.find('#userRoles').append($('<option>')
+                //         .val(role.id).text(role.roleName)
+                //     )
+                // })
+                roleArray.forEach(role => {
+                    formEditUser.find('#editUserRoles')
+                        .append($('<option>')
+                            .prop('selected', user.roles.filter(userRole => userRole.id === role.id).length)
+                            .val(role.id).text(role.roleName));
+                })
+                console.log(user)
+                // formEditUser.find('.submit')
+                //     .attr('onClick', 'updateUser(' + updateUser + ');');
+
+            });
+            formEditUser.modal();
+        });
+}
+
+formEditUser.submit(async function () {
+    function getSelectedRoles() {
+        let array = []
+        for (let elementId of formEditUser.find('#editUserRoles').val().map(id => parseInt(id))) {
+            array.push(roleArray.find(function (_role) {
+                return _role.id === elementId
+            }))
+        }
+        return array
+    }
+
+    let user = {
+        id: formEditUser.find('#editId').val(),
+        firstName: formEditUser.find('#editFirstName').val(),
+        lastName: formEditUser.find('#editLastName').val(),
+        age: formEditUser.find('#editAge').val(),
+        username: formEditUser.find('#editUsername').val(),
+        password: formEditUser.find('#editPassword').val(),
+        roles: getSelectedRoles()
+    }
+    formEditUser.modal('hide')
+    updateUser(user)
+})
 
 $(document).ready(
     () => {

@@ -31,7 +31,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void updateUser(User user) {
-        if(user.getPassword().length() == 0) {
+        if(user.getPassword() == null || user.getPassword().length() == 0) {
             user.setPassword(userDao.getById(user.getId()).getPassword());
         } else {
             user.setPassword(getEncodedPassword(user));
