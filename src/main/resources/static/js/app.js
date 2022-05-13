@@ -5,6 +5,8 @@ const formNewUser = $('#form-new_user');
 const formDeleteUser = $('#form-delete_user');
 const formEditUser = $('#form-edit_user');
 
+const newUserButton = document.getElementById('submit-new-user-btn')
+
 let _role = {}
 let roleArray = []
 
@@ -33,13 +35,14 @@ $('#link-user_tab').click(() => showUsersTable())
 $('#link-new_user_tab').click(() => showNewUserForm())
 
 function showUsersTable() {
-    $('#link-user_tab').addClass('active')
-    $('#users-table-header').addClass('show').addClass('active')
+    getAllUsers()
+    $('#link-user_tab').addClass('active').addClass('show')
+    $('#users-table-header').addClass('active').addClass('show')
     $('#users-table-rows').addClass('active').addClass('show')
     $('#form-new_user-header').removeClass('show').removeClass('active')
     $('#form-new_user').removeClass('show').removeClass('active')
     $('#link-new_user_tab').removeClass('active')
-    getAllUsers()
+
 }
 
 function showNewUserForm() {
@@ -58,8 +61,6 @@ function getAllUsers() {
             response.json().then(users => {
                 usersTableId.empty();
                 users.forEach(user => {
-
-                    console.log(user)
                     addUserToTable(user)
                 })
             })
@@ -111,7 +112,8 @@ function createFormNewUser() {
     })
 }
 
-formNewUser.submit(async function () {
+newUserButton.onclick = () => {
+// formNewUser.submit(function () {
     function getSelectedRoles() {
         let array = []
         for (let elementId of formNewUser.find('#newRoles').val().map(id => parseInt(id))) {
@@ -131,7 +133,8 @@ formNewUser.submit(async function () {
         roles: getSelectedRoles()
     }
     addNewUser(user)
-})
+// })
+}
 
 function addNewUser(user) {
     fetch('/api/users', {
@@ -142,7 +145,7 @@ function addNewUser(user) {
         body: JSON.stringify(user)
     }).then(function (response) {
         if (response.ok) {
-            getAllUsers()
+      alert('!!!!!!!!!!!!!!')
             showUsersTable()
         } else {
             showNewUserForm()
@@ -265,5 +268,6 @@ $(document).ready(
     () => {
         getAllRoles()
         getAllUsers()
+        showUsersTable()
     }
 );

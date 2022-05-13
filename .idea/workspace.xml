@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dadbdaa-380d-4e1d-8265-3e258d18fb4c" name="Changes" comment="Release add user">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="3dadbdaa-380d-4e1d-8265-3e258d18fb4c" name="Changes" comment="Release edit user">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kata/spring/boot_rest/demo/configs/SuccessUserHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kata/spring/boot_rest/demo/configs/SuccessUserHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kata/spring/boot_rest/demo/controller/RestApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kata/spring/boot_rest/demo/controller/RestApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kata/spring/boot_rest/demo/service/UserServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kata/spring/boot_rest/demo/service/UserServiceImp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
     </list>
@@ -159,7 +155,7 @@
       <workItem from="1652105533216" duration="14417000" />
       <workItem from="1652170789783" duration="3455000" />
       <workItem from="1652453098947" duration="3893000" />
-      <workItem from="1652463532453" duration="2782000" />
+      <workItem from="1652463532453" duration="5583000" />
     </task>
     <task id="LOCAL-00001" summary="Make GET /api/users in RestApiController.java">
       <created>1651259733307</created>
@@ -224,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652195028520</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Release edit user">
+      <created>1652466563665</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1652466563665</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +254,7 @@
     <MESSAGE value="Send data from NewUserForm to JS" />
     <MESSAGE value="Realise delete form and methods" />
     <MESSAGE value="Release add user" />
-    <option name="LAST_COMMIT_MESSAGE" value="Release add user" />
+    <MESSAGE value="Release edit user" />
+    <option name="LAST_COMMIT_MESSAGE" value="Release edit user" />
   </component>
 </project>
