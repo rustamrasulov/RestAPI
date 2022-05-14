@@ -1,14 +1,12 @@
-const url = 'http://localhost:8080/api/users'
-
 const usersTableId = $('#users-table-rows');
 const formNewUser = $('#form-new_user');
 const formDeleteUser = $('#form-delete_user');
 const formEditUser = $('#form-edit_user');
 
-const newUserButton = document.getElementById('submit-new-user-btn')
+const newUserButton = document.getElementById('submit-new-user-btn');
 
-let _role = {}
-let roleArray = []
+let _role = {};
+let roleArray = [];
 
 function getAllRoles() {
     fetch('/api/roles').then(function (response) {
@@ -31,28 +29,28 @@ function getAllRoles() {
     });
 }
 
-$('#link-user_tab').click(() => showUsersTable())
-$('#link-new_user_tab').click(() => showNewUserForm())
+$('#link-user_tab').click(() => showUsersTable());
+$('#link-new_user_tab').click(() => showNewUserForm());
 
 function showUsersTable() {
-    getAllUsers()
-    $('#link-user_tab').addClass('active').addClass('show')
-    $('#users-table-header').addClass('active').addClass('show')
-    $('#users-table-rows').addClass('active').addClass('show')
-    $('#form-new_user-header').removeClass('show').removeClass('active')
-    $('#form-new_user').removeClass('show').removeClass('active')
-    $('#link-new_user_tab').removeClass('active')
+    getAllUsers();
+    $('#link-user_tab').addClass('active').addClass('show');
+    $('#users-table-header').addClass('active').addClass('show');
+    $('#users-table-rows').addClass('active').addClass('show');
+    $('#form-new_user-header').removeClass('show').removeClass('active');
+    $('#form-new_user').removeClass('show').removeClass('active');
+    $('#link-new_user_tab').removeClass('active');
 
 }
 
 function showNewUserForm() {
-    $('#form-new_user-header').addClass('show').addClass('active')
-    $('#form-new_user').addClass('show').addClass('active')
-    $('#link-new_user_tab').addClass('active')
-    $('#link-user_tab').removeClass('active')
-    $('#users-table-header').removeClass('show').removeClass('active')
-    $('#users-table-rows').removeClass('show').removeClass('active')
-    createFormNewUser()
+    $('#form-new_user-header').addClass('show').addClass('active');
+    $('#form-new_user').addClass('show').addClass('active');
+    $('#link-new_user_tab').addClass('active');
+    $('#link-user_tab').removeClass('active');
+    $('#users-table-header').removeClass('show').removeClass('active');
+    $('#users-table-rows').removeClass('show').removeClass('active');
+    createFormNewUser();
 }
 
 function getAllUsers() {
@@ -61,7 +59,7 @@ function getAllUsers() {
             response.json().then(users => {
                 usersTableId.empty();
                 users.forEach(user => {
-                    addUserToTable(user)
+                    addUserToTable(user);
                 })
             })
         } else {
@@ -88,16 +86,8 @@ function addUserToTable(user) {
             .click(() => {
                 deleteUserForm(user.id);
             })
-            .text('Delete')))
+            .text('Delete')));
 }
-
-// submitNewUser.onclick = function () {
-//     console.log(formNewUser.find('#newFirstName').val());
-// }
-
-// formNewUser.onsubmit(function () {
-//     alert(formNewUser.find('#newFirstName').val())
-// })
 
 function createFormNewUser() {
     formNewUser.find('#newFirstName').val('');
@@ -113,15 +103,14 @@ function createFormNewUser() {
 }
 
 newUserButton.onclick = () => {
-// formNewUser.submit(function () {
     function getSelectedRoles() {
-        let array = []
+        let array = [];
         for (let elementId of formNewUser.find('#newRoles').val().map(id => parseInt(id))) {
             array.push(roleArray.find(function (_role) {
-                return _role.id === elementId
+                return _role.id === elementId;
             }))
         }
-        return array
+        return array;
     }
 
     let user = {
@@ -132,8 +121,7 @@ newUserButton.onclick = () => {
         password: formNewUser.find('#newPassword').val(),
         roles: getSelectedRoles()
     }
-    addNewUser(user)
-// })
+    addNewUser(user);
 }
 
 function addNewUser(user) {
@@ -145,10 +133,9 @@ function addNewUser(user) {
         body: JSON.stringify(user)
     }).then(function (response) {
         if (response.ok) {
-      alert('!!!!!!!!!!!!!!')
-            showUsersTable()
+            showUsersTable();
         } else {
-            showNewUserForm()
+            showNewUserForm();
         }
     })
 }
@@ -158,7 +145,7 @@ function deleteUser(id) {
         .then(function (response) {
             if (response.ok) {
                 formDeleteUser.modal('hide');
-                getAllUsers()
+                getAllUsers();
             }
         });
 }
@@ -173,11 +160,11 @@ function deleteUserForm(id) {
                 formDeleteUser.find('#age').val(user.age);
                 formDeleteUser.find('#username').val(user.email);
                 formDeleteUser.find('#password').val('');
-                formDeleteUser.find('#userRoles').empty()
+                formDeleteUser.find('#userRoles').empty();
                 user.roles.forEach(role => {
                     formDeleteUser.find('#userRoles').append($('<option>')
                         .val(role.id).text(role.roleName)
-                    )
+                    );
                 })
                 formDeleteUser.find('.submit')
                     .attr('onClick', 'deleteUser(' + id + ');');
@@ -195,21 +182,21 @@ function updateUser(user) {
         body: JSON.stringify(user)
     }).then(function (response) {
         if (response.ok) {
-            showUsersTable()
+            showUsersTable();
         } else {
-            showNewUserForm()
+            showNewUserForm();
         }
     })
 }
 
 function editUserForm(id) {
-    formEditUser.find('#editId').empty()
-    formEditUser.find('#editFirstName').empty()
-    formEditUser.find('#editLastName').empty()
-    formEditUser.find('#editAge').empty()
-    formEditUser.find('#editUsername').empty()
-    formEditUser.find('#password').empty()
-    formEditUser.find('#editUserRoles').empty()
+    formEditUser.find('#editId').empty();
+    formEditUser.find('#editFirstName').empty();
+    formEditUser.find('#editLastName').empty();
+    formEditUser.find('#editAge').empty();
+    formEditUser.find('#editUsername').empty();
+    formEditUser.find('#password').empty();
+    formEditUser.find('#editUserRoles').empty();
     fetch((`/api/users/${id}`))
         .then(function (response) {
             response.json().then(function (user) {
@@ -219,22 +206,12 @@ function editUserForm(id) {
                 formEditUser.find('#editAge').val(user.age);
                 formEditUser.find('#editUsername').val(user.email);
                 formEditUser.find('#password').val('');
-                // formEditUser.find('#editUserRoles').empty()
-                // user.roles.forEach(role => {
-                //     formDeleteUser.find('#userRoles').append($('<option>')
-                //         .val(role.id).text(role.roleName)
-                //     )
-                // })
                 roleArray.forEach(role => {
                     formEditUser.find('#editUserRoles')
                         .append($('<option>')
                             .prop('selected', user.roles.filter(userRole => userRole.id === role.id).length)
                             .val(role.id).text(role.roleName));
                 })
-                console.log(user)
-                // formEditUser.find('.submit')
-                //     .attr('onClick', 'updateUser(' + updateUser + ');');
-
             });
             formEditUser.modal();
         });
@@ -242,13 +219,13 @@ function editUserForm(id) {
 
 formEditUser.submit(async function () {
     function getSelectedRoles() {
-        let array = []
+        let array = [];
         for (let elementId of formEditUser.find('#editUserRoles').val().map(id => parseInt(id))) {
             array.push(roleArray.find(function (_role) {
-                return _role.id === elementId
-            }))
+                return _role.id === elementId;
+            }));
         }
-        return array
+        return array;
     }
 
     let user = {
@@ -260,14 +237,39 @@ formEditUser.submit(async function () {
         password: formEditUser.find('#editPassword').val(),
         roles: getSelectedRoles()
     }
-    formEditUser.modal('hide')
-    updateUser(user)
+    formEditUser.modal('hide');
+    updateUser(user);
 })
+
+function initPage() {
+    $('#user-panel-title').text('Admin panel');
+    $('#nav-adminPanel').addClass('show').addClass('active');
+    $('#nav-userPanel').hide().removeClass('active');
+}
+
+$('#admin-area-tab').click(() => {
+    $('#admin-area-tab').addClass('active').removeClass('btn-light').addClass('btn-primary').prop('aria-selected', true);
+    $('#user-area-tab').removeClass('active').removeClass('btn-primary').addClass('btn-light').prop('aria-selected', false);
+    $('#user-panel-title').text('Admin panel');
+    $('#nav-adminPanel').show().addClass('active');
+    $('#nav-userPanel').hide().removeClass('active');
+
+});
+
+$('#user-area-tab').click(() => {
+    $('#user-area-tab').addClass('active').removeClass('btn-light').addClass('btn-primary').prop('aria-selected', true);
+    $('#admin-area-tab').removeClass('active').removeClass('btn-primary').addClass('btn-light').prop('aria-selected', false);
+    $('#user-panel-title').text('User information-page');
+    $('#nav-adminPanel').hide();
+    $('#nav-userPanel').show();
+
+});
 
 $(document).ready(
     () => {
-        getAllRoles()
-        getAllUsers()
-        showUsersTable()
+        initPage();
+        getAllRoles();
+        showUsersTable();
+        console.log()
     }
 );

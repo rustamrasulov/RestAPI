@@ -26,8 +26,8 @@
         <a class="navbar-brand">
             <b><span class="align-middle" th:text="${currentuser.username}"></span></b>
             <span class="align-middle">with roles:</span>
-            <th:block th:each="auth : ${currentuser.authorities}">
-                <b><span class="align-middle" th:text="${auth.authority}"></span></b>
+            <th:block th:each="role : ${currentuser.roles}">
+                <b><span class="align-middle" th:text="${role.roleName}"></span></b>
             </th:block>
         </a>
         <form class="d-flex" action="/logout" method="post">
@@ -39,21 +39,24 @@
     <div class="row row-cols-2 text-black">
         <div class="col-2 bg-white">
             <div class="nav flex-column nav-pills pt-4" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" href="/admin" sec:authorize="hasAuthority('ADMIN')" role="tab"
+                <a class="nav-link active" id="admin-area-tab" href="#admin-area" sec:authorize="hasAuthority('ADMIN')"
+                   role="tab"
                    aria-controls="v-pills-home" aria-selected="true">Admin</a>
-                <a class="nav-link" href="/user" sec:authorize="(hasAnyAuthority('ADMIN','USER'))" role="tab"
+                <a class="nav-link" id="user-area-tab" href="#user-area"
+                   sec:authorize="(hasAnyAuthority('ADMIN','USER'))" role="tab"
                    aria-controls="v-pills-profile" aria-selected="false">User</a>
             </div>
         </div>
         <div class="col-10">
-            <div class="container-fluid">
-                <h1>Admin panel</h1>
-                <div class="tab-content">
-                    <ul class="nav nav-tabs">
+            <div class="container-fluid" id="admin-area" aria-labelledby="admin-area-tab">
+                <h1 id="user-panel-title">Admin panel</h1>
+                <div class="tab-content" id="nav-adminPanel">
+                    <ul class="nav nav-tabs" id="nav-admin-panel-buttons">
                         <a class="nav-link" role="tab" id="link-user_tab">Users Table</a>
                         <a class="nav-link" role="tab" id="link-new_user_tab">New User</a>
                     </ul>
                     <div class="tab-content" id="nav-tabContent">
+
                         <div class="tab-pane fade show active" id="users-table-header" role="tabpanel">
                             <div class="row border bg-white">
                                 <h5 class="m-2">All users</h5>
@@ -77,6 +80,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-content" id="nav-formContent">
                         <div class="tab-pane fade" id="form-new_user-header" role="tabpanel">
                             <div class="row border bg-white">
@@ -84,83 +88,77 @@
                             </div>
                             <div class="row border bg-white pb-2">
                                 <div class="container col-4 form-group text-center" id="form-new_user">
-<!--                                    <form id="form-new_user">-->
-                                        <label for="newFirstName"><b>First name</b></label>
-                                        <input name="firstName" value="" type="text" class="form-control"
-                                               id="newFirstName"
-                                               required/>
-                                        <label for="newLastName"><b>Last name</b></label>
-                                        <input name="lastName" value="" type="text" class="form-control"
-                                               id="newLastName"
-                                               required/>
-                                        <label for="newAge"><b>Age</b></label>
-                                        <input name="age" value="" type="number" class="form-control text-right"
-                                               id="newAge"/>
-                                        <label for="newUsername"><b>Email</b></label>
-                                        <input name="username" value="" type="text" class="form-control"
-                                               id="newUsername"
-                                               required/>
-                                        <label for="newPassword"><b>Password</b></label>
-                                        <input name="password" value="" type="password" class="form-control"
-                                               id="newPassword" autocomplete="on" required/>
-                                        <label for="newRoles"><b>Role</b></label>
-                                        <select multiple class="form-control form-control-sm" id="newRoles"
-                                                name="roles"
-                                                size="2">
-                                            <!--                                                required>-->
-                                            <!--                                            <option th:each="role: ${roles}"-->
-                                            <!--                                                    th:text="${role.roleName}"-->
-                                            <!--                                                    th:value="${role.id}">-->
-                                            <!--                                            </option>-->
-                                        </select>
-                                        <br>
-                                        <button class="btn btn-success" id="submit-new-user-btn"
-                                                value="Add new user">Add new user
-                                        </button>
-                                        <!--                                        </form>                                        <form id="form-new_user"-->
-                                        <!--                                              action="new" th:method="POST" th:object="${user}">-->
-                                        <!--                                            <label for="firstName"><b>First name</b></label>-->
-                                        <!--                                            <input name="firstName" value="" th:type="text" class="form-control"-->
-                                        <!--                                                   id="firstName"-->
-                                        <!--                                                   required/>-->
-                                        <!--                                            <label for="lastName"><b>Last name</b></label>-->
-                                        <!--                                            <input th:name="lastName" value="" th:type="text" class="form-control"-->
-                                        <!--                                                   id="lastName"-->
-                                        <!--                                                   required/>-->
-                                        <!--                                            <label for="age"><b>Age</b></label>-->
-                                        <!--                                            <input th:name="age" value="" th:type="number"-->
-                                        <!--                                                   class="form-control text-right"-->
-                                        <!--                                                   id="age"/>-->
-                                        <!--                                            <label for="username"><b>Email</b></label>-->
-                                        <!--                                            <input th:name="username" value="" th:type="text" class="form-control"-->
-                                        <!--                                                   id="username"-->
-                                        <!--                                                   required/>-->
-                                        <!--                                            <label for="password"><b>Password</b></label>-->
-                                        <!--                                            <input th:name="password" value="" th:type="password" class="form-control"-->
-                                        <!--                                                   id="password" required/>-->
-                                        <!--                                            <label for="roles"><b>Role</b></label>-->
-                                        <!--                                            <select multiple class="form-control form-control-sm" id="roles"-->
-                                        <!--                                                    name="roles"-->
-                                        <!--                                                    size="2"-->
-                                        <!--                                                    required>-->
-                                        <!--                                                <option th:each="role: ${roles}"-->
-                                        <!--                                                        th:text="${role.roleName}"-->
-                                        <!--                                                        th:value="${role.id}">-->
-                                        <!--                                                </option>-->
-                                        <!--                                            </select>-->
-                                        <!--                                            <br>-->
-                                        <!--                                            <button th:type="submit" class="btn btn-success"-->
-                                        <!--                                                    value="Add new user">Add new user-->
-                                        <!--                                            </button>-->
-<!--                                    </form>-->
+                                    <label for="newFirstName"><b>First name</b></label>
+                                    <input name="firstName" value="" type="text" class="form-control"
+                                           id="newFirstName"
+                                           required/>
+                                    <label for="newLastName"><b>Last name</b></label>
+                                    <input name="lastName" value="" type="text" class="form-control"
+                                           id="newLastName"
+                                           required/>
+                                    <label for="newAge"><b>Age</b></label>
+                                    <input name="age" value="" type="number" class="form-control text-right"
+                                           id="newAge"/>
+                                    <label for="newUsername"><b>Email</b></label>
+                                    <input name="username" value="" type="text" class="form-control"
+                                           id="newUsername"
+                                           required/>
+                                    <label for="newPassword"><b>Password</b></label>
+                                    <input name="password" value="" type="password" class="form-control"
+                                           id="newPassword" autocomplete="on" required/>
+                                    <label for="newRoles"><b>Role</b></label>
+                                    <select multiple class="form-control form-control-sm" id="newRoles"
+                                            name="roles"
+                                            size="2">
+                                    </select>
+                                    <br>
+                                    <button class="btn btn-success" id="submit-new-user-btn"
+                                            value="Add new user">Add new user
+                                    </button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="nav-userPanel">
+                    <div class="tab-pane fade show active" id="user-info-header" role="tabpanel">
+                        <div class="row border bg-white">
+                            <h5 class="m-2">About user</h5>
+                        </div>
+                        <div class="row border bg-white pb-2">
+                            <table class="table table-borderless m-3">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="align-middle">Id</th>
+                                    <th scope="col" class="align-middle">First Name</th>
+                                    <th scope="col" class="align-middle">Last Name</th>
+                                    <th scope="col" class="align-middle">Age</th>
+                                    <th scope="col" class="align-middle">E-Mail</th>
+                                    <th scope="col" class="align-middle">Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="border-top bg-light" th:object="${currentuser}">
+                                    <td th:text="*{id}"/>
+                                    <td th:text="*{firstName}"/>
+                                    <td th:text="*{lastName}"/>
+                                    <td th:text="*{age}"/>
+                                    <td th:text="*{email}"/>
+                                    <td>
+                                        <th:block th:each="role : *{getRoles()}">
+                                            <span th:text="${role.roleName}"/>
+                                        </th:block>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div id="form-delete_user" class="modal fade">
@@ -194,7 +192,8 @@
                             </div>
                             <div>
                                 <label for="username">E-mail</label>
-                                <input type="text" class="form-control" name="username" id="username" autocomplete="email" readonly>
+                                <input type="text" class="form-control" name="username" id="username"
+                                       autocomplete="email" readonly>
                             </div>
                             <div>
                                 <label for="userRoles">Role</label>
@@ -227,23 +226,25 @@
                         <div class="form-group text-center">
                             <div>
                                 <label for="editId">ID</label>
-                                <input type="text" class="form-control text-right" name="editId" id="editId" readonly>
+                                <input type="text" class="form-control text-right" name="editId" id="editId"
+                                       readonly>
                             </div>
                             <div>
                                 <label for="editFirstName">First name</label>
-                                <input type="text" class="form-control" name="editFirstName" id="editFirstName" >
+                                <input type="text" class="form-control" name="editFirstName" id="editFirstName">
                             </div>
                             <div>
                                 <label for="editLastName">Last name</label>
-                                <input type="text" class="form-control" name="editLastName" id="editLastName" >
+                                <input type="text" class="form-control" name="editLastName" id="editLastName">
                             </div>
                             <div>
                                 <label for="editAge">Age</label>
-                                <input type="number" class="form-control text-right" name="editAge" id="editAge" >
+                                <input type="number" class="form-control text-right" name="editAge" id="editAge">
                             </div>
                             <div>
                                 <label for="editUsername">E-mail</label>
-                                <input type="text" class="form-control" name="editUsername" id="editUsername" autocomplete="email" >
+                                <input type="text" class="form-control" name="editUsername" id="editUsername"
+                                       autocomplete="email">
                             </div>
                             <div id="password-div">
                                 <label for="editPassword">Password</label>

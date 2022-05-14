@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dadbdaa-380d-4e1d-8265-3e258d18fb4c" name="Changes" comment="Release edit user">
+    <list default="true" id="3dadbdaa-380d-4e1d-8265-3e258d18fb4c" name="Changes" comment="NonSubmit method for new user">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/kata/spring/boot_rest/demo/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/kata/spring/boot_rest/demo/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/new.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +157,10 @@
       <workItem from="1652105533216" duration="14417000" />
       <workItem from="1652170789783" duration="3455000" />
       <workItem from="1652453098947" duration="3893000" />
-      <workItem from="1652463532453" duration="5583000" />
+      <workItem from="1652463532453" duration="5706000" />
+      <workItem from="1652526433517" duration="3127000" />
+      <workItem from="1652535601192" duration="4349000" />
+      <workItem from="1652548639883" duration="2622000" />
     </task>
     <task id="LOCAL-00001" summary="Make GET /api/users in RestApiController.java">
       <created>1651259733307</created>
@@ -227,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652466563665</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="NonSubmit method for new user">
+      <created>1652469195710</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1652469195710</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +267,7 @@
     <MESSAGE value="Realise delete form and methods" />
     <MESSAGE value="Release add user" />
     <MESSAGE value="Release edit user" />
-    <option name="LAST_COMMIT_MESSAGE" value="Release edit user" />
+    <MESSAGE value="NonSubmit method for new user" />
+    <option name="LAST_COMMIT_MESSAGE" value="NonSubmit method for new user" />
   </component>
 </project>

@@ -33,7 +33,8 @@ public class AdminController {
     @GetMapping(value = "")
     public String showUsers(@AuthenticationPrincipal UserDetails user, Model model) {
         model.addAttribute("users", userService.findAll());
-        model.addAttribute("currentuser", user);
+//        User currentuser = userService.findByUsername(user.getUsername());
+        model.addAttribute("currentuser", userService.findByUsername(user.getUsername()));
         model.addAttribute("roles", roleService.findAll());
         return "admin";
     }
